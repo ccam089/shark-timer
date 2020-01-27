@@ -39,11 +39,21 @@ export class TimeDisplayComponent implements OnInit {
       this.inputHours = this.hours;
       this.inputMinutes = this.minutes;
       this.inputSeconds = this.seconds;
+
+
+      //added an IF statement to disable all the bottom buttons whenever an user inputs 0 in the timer
+      if (this.inputHours == 0 && this.inputMinutes == 0 && this.inputSeconds == 0){
+        var disableButtons = document.getElementsByTagName('button');
+        alert("buttons should be all disabled");
+        //disableButtons.disabled = true;
+      }
     }
   }
   endSetTime() {
     this.settingTime$.next(false);
   }
+
+
 
   get hours(): number {
     return Math.floor(this.time / this.hourInMs);

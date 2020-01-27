@@ -43,6 +43,8 @@ export class TimerControlsComponent implements OnInit {
     }
   }
 
+
+
   start() {
     if (this.timerActive) {
       this.timerStart$.next(true);
@@ -75,7 +77,14 @@ export class TimerControlsComponent implements OnInit {
   }
 
   toggleAlarm() {
+  //added an IF statement to make toggleAlarm work
     this.alarmEnabled$.next(!this.alarmEnabled$.value);
+    if (!this.alarmEnabled$.value == false){
+      this.alarm.play();
+    } else {
+      this.alarm.pause();
+    }
+
   }
 
   startAlarm() {
@@ -92,9 +101,26 @@ export class TimerControlsComponent implements OnInit {
     }
   }
 
-  toggleFullscreen() {
-    this.fullScreen$.next(!this.fullScreen$.value);
+  toggleFullscreen() { 
+    //added an IF statement to make toggleFullscreen work
+    //this.fullScreen$.next(!this.fullScreen$.value);
+ 
+    if (document['fullscreenElement']) {
+      if (document.exitFullscreen)
+      document.exitFullscreen();
+      this.fullScreen$.next(false);
+      
+    } else {
+      var body = document.body;
+      if (body.requestFullscreen)
+      body.requestFullscreen();
+      this.fullScreen$.next(true);
+    }
   }
+
+
+
+
 
   get started() {
     return this.timerActive ? this.timerStart$.value : this.stopwatchStart$.value;
