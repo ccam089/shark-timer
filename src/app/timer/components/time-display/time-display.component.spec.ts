@@ -24,4 +24,14 @@ describe('TimeDisplayComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should display an alert', () => {
+        spyOn(window, 'alert');
+        component.inputHours = 0;
+        component.inputMinutes = 0;
+        component.inputSeconds = 0;
+        component.startSetTime();
+        console.log("component.inputHours", component.inputHours)
+        expect(window.alert).toHaveBeenCalledWith('buttons should be all disabled');
+    });
 });

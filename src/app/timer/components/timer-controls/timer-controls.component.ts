@@ -43,8 +43,6 @@ export class TimerControlsComponent implements OnInit {
     }
   }
 
-
-
   start() {
     if (this.timerActive) {
       this.timerStart$.next(true);
